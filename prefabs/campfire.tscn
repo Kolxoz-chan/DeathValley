@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://script/campfire.gd" type="Script" id=1]
+[ext_resource path="res://textures/tilesets/items.png" type="Texture" id=2]
+[ext_resource path="res://textures/light/cicrle.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.476077, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.9375, 0, 1, 0.253906, 0.253906, 0.253906, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.00040629, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5033 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 85.27
+initial_velocity_random = 1.0
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[node name="campfire" type="Area2D" groups=[
+"campfire",
+]]
+position = Vector2( 481.753, 224.365 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="wood" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 64, 64 )
+
+[node name="flame" type="Particles2D" parent="."]
+position = Vector2( -1.22943, 20.9003 )
+rotation = -1.56054
+amount = 10
+process_material = SubResource( 6 )
+
+[node name="light" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 3.0
+color = Color( 1, 0.937255, 0.258824, 1 )
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="timeout" from="timer" to="." method="_on_Timer_timeout"]
