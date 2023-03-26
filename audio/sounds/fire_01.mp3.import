@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fire_01.mp3-c086c04c556a2539a03a4824734b4a6f.mp3str"
+
+[deps]
+
+source_file="res://audio/sounds/fire_01.mp3"
+dest_files=[ "res://.import/fire_01.mp3-c086c04c556a2539a03a4824734b4a6f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
