@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_unshaded = true
+albedo_color = Color( 0.407843, 0.713726, 0.431373, 1 )
+
+[sub_resource type="SphereMesh" id=6]
+material = SubResource( 9 )
+radius = 0.02
+height = 0.04
+radial_segments = 5
+rings = 5
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0282595, 0, 0, Vector2( 1, 0 ), -3.44859, 0.0, 0, 0 ]
+
+[sub_resource type="SphereShape" id=8]
+radius = 0.5
+
+[node name="SodaAnomaly" type="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0104985, 0, 0.0174732 )
+
+[node name="particles" type="CPUParticles" parent="."]
+amount = 12
+lifetime = 2.0
+lifetime_randomness = 1.0
+mesh = SubResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3( 0, 1, 0 )
+initial_velocity_random = 1.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 7 )
+
+[node name="collider" type="CollisionShape" parent="."]
+shape = SubResource( 8 )
+
+[node name="light" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129735, 0 )
+light_color = Color( 0, 1, 0.0627451, 1 )

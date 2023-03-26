@@ -23,7 +23,7 @@ func mouse_handle(event):
 func gravity_handle(vec, delta):
 	_gravity -= _gravity_power * delta
 	
-	if is_on_floor():
+	if is_on_floor() and _gravity < 0:
 		_gravity = 0
 		
 	return vec + Vector3(0, _gravity, 0)
@@ -31,8 +31,6 @@ func gravity_handle(vec, delta):
 func keyboard_handle(vec):
 	if Input.is_action_pressed("ui_exit"):
 		get_tree().quit()
-	if Input.is_action_pressed("ui_jump"):
-		_gravity = _jump_power
 	if Input.is_action_pressed("ui_left"):
 		vec -= transform.basis.x
 	if Input.is_action_pressed("ui_right"):
@@ -41,6 +39,10 @@ func keyboard_handle(vec):
 		vec -= transform.basis.z
 	if Input.is_action_pressed("ui_down"):
 		vec += transform.basis.z
+	if Input.is_action_pressed("ui_jump"):
+		if is_on_floor():
+			print(213)
+			_gravity = _jump_power
 		
 	return vec
 
