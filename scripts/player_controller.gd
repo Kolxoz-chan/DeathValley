@@ -4,7 +4,9 @@ export var _speed = 1.0
 export var _mouse_sensetivity = 0.4
 export var _gravity_power = 5.0
 export var _jump_power = 2.0
+export var _acceleration_power = 2.0
 
+var _acceleration = 1
 var _gravity = 0;
 
 func _ready():
@@ -29,19 +31,23 @@ func gravity_handle(vec, delta):
 	return vec + Vector3(0, _gravity, 0)
 
 func keyboard_handle(vec):
+	if Input.is_action_pressed("ui_accel"):
+		_acceleration = _acceleration_power
+	else:
+		_acceleration = 1
+	
 	if Input.is_action_pressed("ui_exit"):
 		get_tree().quit()
 	if Input.is_action_pressed("ui_left"):
-		vec -= transform.basis.x
+		vec -= transform.basis.x * _acceleration
 	if Input.is_action_pressed("ui_right"):
-		vec += transform.basis.x
+		vec += transform.basis.x * _acceleration
 	if Input.is_action_pressed("ui_up"):
-		vec -= transform.basis.z
+		vec -= transform.basis.z * _acceleration
 	if Input.is_action_pressed("ui_down"):
-		vec += transform.basis.z
+		vec += transform.basis.z * _acceleration
 	if Input.is_action_pressed("ui_jump"):
 		if is_on_floor():
-			print(213)
 			_gravity = _jump_power
 		
 	return vec

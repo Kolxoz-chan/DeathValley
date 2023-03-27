@@ -50,7 +50,6 @@ offsets = PoolRealArray( 0, 0.501493, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0.984375, 0, 1, 0, 0, 0, 1 )
 
 [node name="BurnAnomaly" type="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0905761, 0, -2.50656 )
 
 [node name="collider" type="CollisionShape" parent="."]
 shape = SubResource( 8 )
